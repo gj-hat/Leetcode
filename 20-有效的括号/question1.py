@@ -1,33 +1,36 @@
 import time
 
-
-def func(str: str) -> bool:
-    strack = list()
-    for i in str:
-        if (i == '{') or (i == '[') or (i == '('):
-            strack.append(i)
-            continue
-        else:
-            if strack is not None:
-                if strack[-1] == '{' and i == '}':
-                    strack.pop()
-                elif strack[-1] == '[' and i == ']':
-                    strack.pop()
-                elif strack[-1] == '(' and i == ')':
-                    strack.pop()
-                else:
-                    return False
-            elif strack is not None:
-                return False
+class Solution:
+    def isValid(self, s) -> bool:
+        res_list = []
+        for i in s:
+            if i == '{' or i == '[' or i == '(':
+                res_list.append(i)
             else:
-                return False
-    return True
+                # 排除初始值就不正确的情况
+                if res_list == [] and (i[-1] == "}" or i[-1] == "]" or i[-1] == ")"):
+                    return False
+                if i == "}" and res_list[-1] == "{":
+                    res_list.pop()
+                elif i == "]" and res_list[-1] == "[":
+                    res_list.pop()
+                elif i == ")" and res_list[-1] == "(":
+                    res_list.pop()
+                else:
+                    # 出口
+                    return False
+        return res_list == []
 
 
 if __name__ == '__main__':
-    start = time.clock()
-    str = "{{[]}()[]{}}"
+    start = time.time()
+    # str = "{{[]}()[]{}}"
+    # str = "(])"
+    str = "]"
     # str = "{{)}}"
-    print(func(str))
-    stop = time.clock()
+
+    a = Solution().isValid(str)
+    print(a)
+
+    stop = time.time()
     print(f"用时:", stop - start)
