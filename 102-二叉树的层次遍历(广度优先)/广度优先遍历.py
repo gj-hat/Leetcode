@@ -9,6 +9,7 @@
 
 import tree
 
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -17,62 +18,30 @@ import tree
 #         self.right = right
 class Solution:
     # 广度优先遍历
-    def inorderTraversal(self, root):
-        res = []
-        if root is None:
-            return res
-        cur = root
-        queue = [cur]
-        count = 1
-        while queue:
-            temp = []
-            cur_node = queue.pop(0)
-            if count == 1:
-                temp.append(cur_node.val)
-                res.append(temp)
-                count = 2
-                temp = []
-
-            if cur_node.left is not None:
-                queue.append(cur_node.left)
-                temp.append(cur_node.left.val)
-
-            if cur_node.right is not None:
-                queue.append(cur_node.right)
-                temp.append(cur_node.right.val)
-            res.append(temp)
-
-
-        return [i for i in res if i != []]
-
-        # return res
-
-
-    def inorderTraversal1(self, root):
-        # todo 没看懂
+    def breadth_travel(self, root) -> list:
         if root is None:
             return []
-        current = [root]
-        res = []
-        nxt = []
-        tmp_val = []
-        while current:
-            tmp = current.pop(0)
-            tmp_val.append(tmp.val)
-            if tmp.left is not None:
-                nxt.append(tmp.left)
-            if tmp.right is not None:
-                nxt.append(tmp.right)
-            if not current:
-                if not nxt:
-                    if tmp_val:
-                        res.append(tmp_val)
+        current = [root]         # 将root节点初始化为current
+        res = []                 # 结果数组
+        next = []               # 下一层暂存  下一层的左右孩子
+        tmp_val = []              # 每一层数组
+        while current:                       # 当前数组不为空
+            tmp = current.pop(0)       # 当前数组中 队首元素出队
+            tmp_val.append(tmp.val)             # 上面队首元素的值 入每一层的数组队列
+            if tmp.left is not None:              # 左孩子不为空
+                next.append(tmp.left)               # next数组中添加左孩子
+            if tmp.right is not None:             # 右孩子不为空
+                next.append(tmp.right)               # next数组中添加右孩子
+            if not current:                      # 当前为空时候
+                if not next:                        # next为空
+                    if tmp_val:                       # 每一层的数组不为空
+                        res.append(tmp_val)            # 结果数组中添加每一层的元素
                     return res
                 else:
-                    current = nxt
-                    nxt = []
-                res.append(tmp_val)
-                tmp_val = []
+                    current = next                       # 指针后移  current = next
+                    next = []                             # next值为空
+                res.append(tmp_val)                       # 结果数组中添加每一层的元素
+                tmp_val = []                                # 每一层置为空
 
 
 

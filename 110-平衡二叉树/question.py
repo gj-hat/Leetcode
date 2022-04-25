@@ -18,7 +18,7 @@ import tree
 #         self.left = left
 #         self.right = right
 class Solution:
-    # todo 没看懂
+
     def isBalanced(self, root) -> bool:
         if root is None:
             return True

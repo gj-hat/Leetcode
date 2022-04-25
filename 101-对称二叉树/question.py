@@ -22,7 +22,7 @@ class Solution:
             return True
         return self.deppCheck(root.left, root.right)
 
-# todo 没看懂
+
     def deppCheck(self, left, right):
         """
         递归处理:
