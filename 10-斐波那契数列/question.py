@@ -15,6 +15,7 @@ f(n) =    0     n = 0
           f(n-1) + f(n-2)  n > 1
 """
 
+
 def algorithm_algorithm(n: int) -> int:
     """
     recursion     递归实现   缺点 会重复计算 时间复杂度很高
@@ -62,28 +63,47 @@ def algorithm_ordinary(n: int) -> int:
     elif n == 1:
         return 1
     else:
-        for i in range(2, n+1):
+        for i in range(2, n + 1):
             res = pre + pre_pre
             pre_pre = pre
             pre = res
         return res
 
 
+def algorithm_ordinary_3(n: int):
+    """
+    动态规划
+    :param n:
+    :return:
+    """
+    if n <= 1:
+        return n
+    dp = [0 for _ in range(n+1)]
+    dp[0] = 0
+    dp[1] = 1
+    for i in range(2, n+1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[-1]
+
 
 if __name__ == '__main__':
-    num = input("有多少楼梯:")
+    # num = input("有多少楼梯:")
+    # start = time.time()
+    # print(algorithm_algorithm(int(num)), end=" ")
+    # stop = time.time()
+    # print(f"用时:", str(stop - start))
+    # # #
+    # start = time.time()
+    # print(algorithm_algorithm_2(int(num)), end=" ")
+    # stop = time.time()
+    # print(f"用时:", stop - start)
+    #
     start = time.time()
-    print(algorithm_algorithm(int(num)), end=" ")
-    stop = time.time()
-    print(f"用时:", str(stop - start))
-    # #
-    start = time.time()
-    print(algorithm_algorithm_2(int(num)), end=" ")
+    print(algorithm_ordinary(8), end=" ")
     stop = time.time()
     print(f"用时:", stop - start)
 
     start = time.time()
-    print(algorithm_ordinary(int(num)), end=" ")
+    print(algorithm_ordinary_3(8), end=" ")
     stop = time.time()
     print(f"用时:", stop - start)
-
