@@ -7,8 +7,6 @@
  @version:     1.0
 """
 import time
-
-
 class Solution:
     def numSubarrayProductLessThanK(self, nums: list, k: int) -> int:
         #   nums = [10, 5, 2, 6]
@@ -27,20 +25,21 @@ class Solution:
                 j = j + 1
         return len(sum_li)
 
-
-    # todo 贪心算法还不会
+    #  贪心算法
     def numSubarrayProductLessThan(self, nums: list, k: int) -> int:
-        ans, left, cur = 0, 0, 1
-        for right, num in enumerate(nums):
-            cur *= num
-            # 当前到右指针的连乘太大，需要一直挪动左指针直到小于k
-            while left <= right and cur >= k:
-                cur //= nums[left]
-                left += 1
-            # 在left到right之间的i, nums[i:right+1]的连乘都满足小于k
-            ans += right - left + 1
-        return ans
-
+        #     nums = [10, 5, 2, 6]
+        count, start, res = 0, 0, 1
+        # 枚举遍历数组 key=下标  value=元素
+        for stop, num in enumerate(nums):
+            # res = res * 当前元素
+            res *= num
+            # 当res大于k值了 进入while循环
+            while start <= stop and res >= k:
+                res //= nums[start]
+                start += 1
+            # 在start到stop之间的i, nums[i:stop+1]的连乘都满足小于k
+            count += stop - start + 1
+        return count
 
 
 
@@ -58,3 +57,7 @@ if __name__ == '__main__':
     # time2 = time.time()
     # print(time2 - time1)
 
+    time1 = time.time()
+    print(test.numSubarrayProductLessThan(nums, 100))
+    time2 = time.time()
+    print(time2 - time1)
