@@ -1,24 +1,25 @@
-class Solution:
-    def fib(self, n: int) -> int:
-        if n <= 1:
-            return n
-        dp = [0 for _ in range(n + 1)]
-        dp[0] = 0
-        dp[1] = 1
-        for i in range(2, n + 1):
-            dp[i] = dp[i - 1] + dp[i - 2]
-        return dp[n]
+# 方程式应为 1x + ky = n
+# 这里n其实为大边长
 
-    def fib1(self, n):
-        if n == 0:
-            return 0
-        elif n == 1:
-            return 1
+
+n = int(input("请输入n值:"))
+k = int(input("请输入k值:"))
+
+
+def Permutation(num):
+    if num == 0:
+        return 1
+    else:
+        return num * Permutation(num - 1)
+
+
+if __name__ == '__main__':
+
+    # print(Permutation(4))
+    a = 0
+    for i in range(n + 1):
+        if (n - i) % k == 0:
+            a += Permutation(i + (n - i) / k) / (Permutation(i) * Permutation((n - i) / k))
         else:
-            return self.fib1(n - 1) + self.fib1(n - 2)
-
-
-if __name__ == "__main__":
-    a = Solution()
-    print("fib:", a.fib(45))
-    print("fib1:", a.fib1(45))
+            continue
+    print(int(a))
