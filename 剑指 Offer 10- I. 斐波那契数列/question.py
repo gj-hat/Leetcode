@@ -1,3 +1,11 @@
+"""
+ @author：     JiaGuo
+ @emil：       1520047927@qq.com
+ @date：       Created in 2022/3/25 16:42
+ @description：   剑指 Offer 10- I. 斐波那契数列
+ @modified By：
+ @version:     1.0
+"""
 
 class Solution:
     def fib(self, n: int) -> int:
@@ -19,3 +27,4 @@ class Solution:
 if __name__ == '__main__':
     re = Solution().fib(5)
     print(re)
+

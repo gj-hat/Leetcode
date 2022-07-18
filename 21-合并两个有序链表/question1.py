@@ -2,8 +2,8 @@ import time
 
 
 class Node:
-    def __init__(self, data=None):
-        self.data = data
+    def __init__(self, val=None):
+        self.val = val
         self.next = None
 
 
@@ -35,7 +35,7 @@ class SingleLinkList:
         """
         current = self.__head
         while current is not None:
-            print(current.data, end=" ")
+            print(current.val, end=" ")
             current = current.next
 
     def add(self, item):
@@ -93,7 +93,7 @@ class SingleLinkList:
         current = self.__head
         pre = None
         while current is not None:
-            if current.data == item:
+            if current.val == item:
                 pre.next = current.next
                 return True
             else:
@@ -110,51 +110,68 @@ class SingleLinkList:
         current = self.__head
         index = 0
         while current is not None:
-            if current.data == item:
+            if current.val == item:
                 return index
             current = current.next
             index += 1
         return -1
 
 
-def fun1(node1, node2):
-    newNode = Node()
-    currentNewNode = newNode
-    currentNode1 = node1
-    currentNode2 = node2
-
-    """ leetcode需要删除 """
-    currentNode1 = currentNode1.next
-    currentNode2 = currentNode2.next
-
-    while currentNode1 is not None and currentNode2 is not None:
-        if currentNode1.data < currentNode2.data:
-            currentNewNode.next = currentNode1
-            currentNode1 = currentNode1.next
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        node = Node()
+        node_current = node
+        list1_current = list1
+        list2_current = list2
+        while list1_current is not None and list2_current is not None:
+            if list1_current.val < list2_current.val:
+                tempNode = Node(list1_current.val)
+                node_current.next = tempNode
+                node_current = node_current.next
+                list1_current = list1_current.next
+            else:
+                tempNode = Node(list2_current.val)
+                node_current.next = tempNode
+                node_current = node_current.next
+                list2_current = list2_current.next
+        if list1_current is None:
+            node_current.next = list2_current
         else:
-            currentNewNode.next = currentNode2
-            currentNode2 = currentNode2.next
-        currentNewNode = currentNewNode.next
-    if currentNode1 is None:
-        currentNewNode.next = currentNode2
-    elif currentNode2 is None:
-        currentNewNode.next = currentNode1
-
-    """ leetcode 改为newNode.next"""
-    return newNode
+            node_current.next = list1_current
+        return node.next
 
 
 if __name__ == '__main__':
-    node1 = Node()
+    node1 = Node(1)
+    node2 = Node(1)
     head1 = SingleLinkList(node1)
-    node2 = Node()
     head2 = SingleLinkList(node2)
-    arr1 = [1, 2, 4]
-    for i in arr1:
-        head1.append(i)
-    arr2 = [1, 3, 4]
-    for i in arr2:
-        head2.append(i)
+    head1.append(2)
+    head1.append(4)
+    head2.append(3)
+    head2.append(4)
+    head3 = Solution().mergeTwoLists(node1, node2)
+    SingleLinkList(head3).travel()
+
+
+
+
+    #
+    # node1 = Node()
+    # head1 = SingleLinkList(node1)
+    # node2 = Node()
+    # head2 = SingleLinkList(node2)
+    # arr1 = [1, 2, 4]
+    # for i in arr1:
+    #     head1.append(i)
+    # arr2 = [1, 3, 4]
+    # for i in arr2:
+    #     head2.append(i)
     # head1.travel()
 
     # start = time.time()
@@ -163,9 +180,3 @@ if __name__ == '__main__':
     # stop = time.time()
     # print(f"用时:", stop - start)
 
-    start = time.time()
-    print("排序后:")
-    a = fun1(node1, node2)
-    stop = time.time()
-    SingleLinkList(a).travel()
-    print(f"用时:", stop - start)

@@ -18,6 +18,11 @@ def main_body(nums, target):
 def main_body_with_hashmap(nums, target):
     """
     穷举 + 遍历hashmap
+    只遍历一次
+    第一个元素直接放入hash中
+    第二元素开始
+        计算目标值与当前元素的差 查找hash中是否存在
+            若存在则直接返回 不存在则放入hash中 继续遍历
     :param nums:
     :param target:
     :return:

@@ -9,6 +9,14 @@
 
 
 def merge_list(nums1: list, m, nums2: list, n):
+    """
+    双指针 遍历两个数组 排序好 放入新数组 然后将新数组赋值给nums1
+    :param nums1:
+    :param m:
+    :param nums2:
+    :param n:
+    :return:
+    """
     temp = list()
     index1 = 0
     index2 = 0
@@ -27,8 +35,11 @@ def merge_list(nums1: list, m, nums2: list, n):
         nums1[i] = temp[i]
 
 
+
+
+
 if __name__ == '__main__':
-    nums1 = [2, 0]
+    nums1 = [0]
     nums2 = [1]
     merge_list(nums1, 1, nums2, 1)
     print(nums1)

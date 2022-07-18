@@ -1,3 +1,4 @@
+
 """
  @author：     JiaGuo
  @emil：       1520047927@qq.com
@@ -7,9 +8,10 @@
  @version:     1.0
 """
 
+
 class Node:
-    def __init__(self, data=None):
-        self.data = data
+    def __init__(self, val=None):
+        self.val = val
         """" 类似于js  给self中添加next属性 初始值是none  """
         self.next = None
 
@@ -42,7 +44,7 @@ class SingleLinkList:
         """
         current = self.__head
         while current is not None:
-            print(current.data, end=" ")
+            print(current.val, end=" ")
             current = current.next
         print()
 
@@ -101,7 +103,7 @@ class SingleLinkList:
         current = self.__head
         pre = None
         while current is not None:
-            if current.data == item:
+            if current.val == item:
                 pre.next = current.next
                 return True
             else:
@@ -118,9 +120,8 @@ class SingleLinkList:
         current = self.__head
         index = 0
         while current is not None:
-            if current.data == item:
+            if current.val == item:
                 return index
             current = current.next
             index += 1
         return -1
-

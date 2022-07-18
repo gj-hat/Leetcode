@@ -2,13 +2,18 @@
  @author：     JiaGuo
  @emil：       1520047927@qq.com
  @date：       Created in 2022/3/25 12:24
- @description： 合并两个有序数组
+ @description： 移动0
  @modified By：
  @version:     1.0
 """
 
 
 def move_zero(nums):
+    """
+    移除所有0并统计个数  然后直接新增对应个数0
+    :param nums:
+    :return:
+    """
     size = len(nums)
     j = 0
     for i in range(size):

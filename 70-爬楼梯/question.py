@@ -14,6 +14,7 @@ f(n) =    1     n = 1
           f(n-1) + f(n-2)  n > 2
 """
 
+
 class Solution:
     # 递归解决
     def climbStairs(self, n: int) -> int:
@@ -47,6 +48,23 @@ class Solution:
     def climbStairs1(self, n: int) -> int:
         if n == 1:
             return 1
+        elif n == 2:
+            return 2
+        a1 = 1
+        a2 = 2
+        res = a1 + a2
+        count = 3
+        while count < n:
+            a1 = a2
+            a2 = res
+            res = a1 + a2
+            count += 1
+        return res
+
+
+    def climbStairs2(self, n: int) -> int:
+        if n == 1:
+            return 1
         if n == 2:
             return 2
         res = 0
@@ -60,7 +78,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-
-    # a = Solution().climbStairs(4)
-    a = Solution().climbStairs1(4)
+    # a = Solution().climbStairs(5)
+    a = Solution().climbStairs1(5)
     print(a)
+
