@@ -100,14 +100,10 @@ if __name__ == '__main__':
     cur.next = ListNode(7)
 
     a = Solution()
-    # a.reverseList(head)
-    # a.print_list(head)
 
     res = a.main(head)
     a.print_list(res)
 
-    #
-    # h1, h2 = a.splitList(head)
-    # # a.print_list(head)
-    # a.print_list(h1)
-    # a.print_list(h2)
+
+
+
